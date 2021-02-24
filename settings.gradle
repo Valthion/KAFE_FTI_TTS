@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "KAFE_FTI_TTS"

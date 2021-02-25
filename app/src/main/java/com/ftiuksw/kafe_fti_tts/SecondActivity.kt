@@ -27,4 +27,9 @@ class SecondActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun go2mainActivity(view: View) {
+        var intent = Intent(this,MainActivity::class.java)
+        startActivity(intent)
+    }
+
 }

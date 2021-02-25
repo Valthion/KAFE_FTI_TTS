@@ -11,7 +11,7 @@
         android:layout_width="320dp"
         android:layout_height="111dp"
         android:gravity="center"
-        android:text="APP VERSION 1.0 \nDeveloped By : Valen Brata Pranaya - 672018072"
+        android:text="APP VERSION 1.0 ALPHA RELEASE \nDeveloped By : Valen Brata Pranaya - 672018072"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -17,36 +18,41 @@ class OrderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.order_activity)
-    }
+        val mieet = findViewById<EditText>(R.id.angkamie)
+        val baksoet = findViewById<EditText>(R.id.angkabakso)
+        val tehet = findViewById<EditText>(R.id.angkateh)
+        val kopiet = findViewById<EditText>(R.id.angkakopi)
+        val rokoket = findViewById<EditText>(R.id.angkarokok)
+        val address = findViewById<EditText>(R.id.address)
+        val phone = findViewById<EditText>(R.id.phone)
+        val notes = findViewById<EditText>(R.id.notes)
+        val chkbtn = findViewById<Button>(R.id.chkbtn)
 
-    fun order(view: View) {
-        val builder = AlertDialog.Builder(this)
-        val inflater = layoutInflater
-        builder.setTitle("Order")
-        val dialogLayout = inflater.inflate(R.layout.alert_dialog, null)
-        val editText  = dialogLayout.findViewById<EditText>(R.id.editText)
-        builder.setView(dialogLayout)
-        builder.setPositiveButton("OK") {
-                dialogInterface, i -> Toast.makeText(applicationContext, "Food Ordered: " + editText.text.toString(), Toast.LENGTH_SHORT).show()
-        }
-        builder.show()
-    }
 
-    fun go2Checkout(view: View) {
-        val builder = AlertDialog.Builder(this)
-        val inflater = layoutInflater
-        builder.setTitle("Address")
-        val dialogLayout = inflater.inflate(R.layout.alert_dialog, null)
-        dialogLayout.findViewById<EditText>(R.id.editText)
-        builder.setView(dialogLayout)
-        builder.setPositiveButton("OK") {
-                dialogInterface, i -> Toast.makeText(applicationContext, "Address Assigned!", Toast.LENGTH_SHORT).show()
-                llProgressBar.visibility = View.VISIBLE
-                Handler(Looper.getMainLooper()).postDelayed({
-                    var intent = Intent(this,CheckoutActivity::class.java)
-                    startActivity(intent)
-            }, 1000)
+        chkbtn.setOnClickListener {
+            val mie = mieet.text.toString()
+            val bakso = baksoet.text.toString()
+            val teh = tehet.text.toString()
+            val kopi = kopiet.text.toString()
+            val rokok = rokoket.text.toString()
+            val add = address.text.toString()
+            val ph = phone.text.toString()
+            val nt = notes.text.toString()
+
+            llProgressBar.visibility = View.VISIBLE
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent = Intent(this,CheckoutActivity::class.java)
+                intent.putExtra("mie", mie)
+                intent.putExtra("bakso", bakso)
+                intent.putExtra("teh", teh)
+                intent.putExtra("kopi", kopi)
+                intent.putExtra("rokok", rokok)
+
+                intent.putExtra("address", add)
+                intent.putExtra("phone", ph)
+                intent.putExtra("notes", nt)
+                startActivity(intent) }, 1000)
         }
-        builder.show()
+        }
+
     }
-}

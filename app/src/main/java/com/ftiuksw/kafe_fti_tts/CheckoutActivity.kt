@@ -14,6 +14,9 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import kotlinx.android.synthetic.main.activity_second.*
 import kotlinx.android.synthetic.main.checkout_activity.*
+import kotlinx.android.synthetic.main.order_activity.*
+import java.util.Collections.list
+import kotlin.system.exitProcess
 
 class CheckoutActivity : AppCompatActivity() {
 
@@ -49,12 +52,39 @@ class CheckoutActivity : AppCompatActivity() {
 
         mNotificationManager.createNotificationChannel(mChannel)
         mNotificationManager.notify(1, mBuilder.build())
-        var message2 = intent.getStringExtra("name")
-        TEST.text = message2
+        val intent = intent
+
+        val mie = intent.getStringExtra("mie")
+        val bakso = intent.getStringExtra("bakso")
+        val teh = intent.getStringExtra("teh")
+        val kopi = intent.getStringExtra("kopi")
+        val rokok = intent.getStringExtra("rokok")
+        val add = intent.getStringExtra("address")
+        val pho = intent.getStringExtra("phone")
+        val not = intent.getStringExtra("notes")
+
+        val mie1 : Int? = mie?.toIntOrNull()?.times(8000)
+        val bakso1 : Int? = bakso?.toIntOrNull()?.times(10000)
+        val teh1 : Int? = teh?.toIntOrNull()?.times(2000)
+        val kopi1 : Int? = kopi?.toIntOrNull()?.times(2500)
+        val rokok1 : Int? = rokok?.toIntOrNull()?.times(10000)
+
+        val total : List<Int> = listOfNotNull(mie1, bakso1, teh1, kopi1, rokok1)
+        total.sum()
+
+        val display = findViewById<TextView>(R.id.TEXTBOX)
+        display.text = "Mie Ayam \nBakso \nTeh \nKopi \nRokok "
+
+        val display2 = findViewById<TextView>(R.id.TEXTBOX2)
+        display2.text = " "+ mie +" = " + mie1 + "\n " + bakso + " = " + bakso1 + "\n " + teh + " = " + teh1 + "\n " + kopi + " = " + kopi1 + "\n " + rokok + " = " + rokok1
+
+        val display3 = findViewById<TextView>(R.id.TEXTBOX3)
+        display3.text = "Subtotal =  " + total.sum() + "\nAddress: " + add + "\nPhone: " + pho + "\nNotes: " + not
+
     }
 
-    fun go2secondActivity(view: View) {
-        val intent = Intent(this, SecondActivity::class.java)
-            startActivity(intent)
-        }
+    fun quitApp(view: View) {
+        this.finishAffinity()
+        exitProcess(0)
     }
+}

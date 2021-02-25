@@ -24,6 +24,9 @@ class SignUpActivity : AppCompatActivity() {
     }
     @RequiresApi(Build.VERSION_CODES.O)
     fun go2secondActivity(view: View) {
+
+
+
         val UpdateAlert= AlertDialog.Builder(this)
 
         UpdateAlert.setTitle("Create Account")
